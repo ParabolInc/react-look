@@ -16,8 +16,9 @@ export default class LookRoot extends Component {
 
   constructor(props) {
     super(...arguments)
+    this.styleContainer = StyleContainer
     this.config = _.merge({ }, props.config, {
-      _resolveStyles: resolveStyles
+      _resolveStyles: (Component, element, config) => resolveStyles(Component, element, config, this.styleContainer)
     })
 
     const { prefixer } = this.config
@@ -57,13 +58,13 @@ class StyleComponent {
 
   createStyleElement(styleElementId = '_react-look-stylesheet') {
     let style = document.getElementById(styleElementId)
-  
+
     if (!style) {
       style = document.createElement('style')
       style.id = styleElementId
       document.head.appendChild(style)
     }
-  
+
     return style
   }
 

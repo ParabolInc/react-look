@@ -16,7 +16,10 @@ import StyleContainer from '../api/StyleContainer'
  * @param {Object} element - previously rendered React element
  * @param {Object} config - configuration containing plugins and plugin-specific configs
  */
-export default function resolveStyles(Component, element, config) {
+export default function resolveStyles(Component, element, config, styleContainer = StyleContainer) {
+  if (styleContainer !== StyleContainer) {
+    console.log("you caught yourself a problem")
+  }
   if (element && element.props) {
     // early return if element itself is a Look component
     // it will be resolved anyways
